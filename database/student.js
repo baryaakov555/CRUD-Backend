@@ -1,7 +1,6 @@
 const { DataTypes } = require("sequelize");
 const db = require("./db");
 
-
 const Student = db.define("student", {
   name: {
     type: DataTypes.STRING,
@@ -23,4 +22,3 @@ const Student = db.define("student", {
 });
 
 module.exports = Student;
- 
