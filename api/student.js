@@ -11,4 +11,36 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.post("/", async (req, res) => {
+  try {
+    const studentInput = req.body;
+    const newStudent = await Student.create(studentInput);
+    res.json(newStudent);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const student = await Student.findByPk(req.params.id);
+    res.json(student);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const student = await Student.findByPk(req.params.id);
+    await student.destroy();
+    res.json(student);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;

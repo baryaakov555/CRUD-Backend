@@ -14,8 +14,8 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const camputInput = req.body;
-    const newCampus = await Campus.create(camputInput);
+    const campustInput = req.body;
+    const newCampus = await Campus.create(campustInput);
     res.json(newCampus);
   } catch (error) {
     console.error(error);
