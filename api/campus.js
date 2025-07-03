@@ -15,8 +15,29 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const camputInput = req.body;
-    const newCampuse = await Campus.create(camputInput);
-    res.json(newCampuse);
+    const newCampus = await Campus.create(camputInput);
+    res.json(newCampus);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const campus = await Campus.findByPk(req.params.id, { include: Student });
+    res.json(campus);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const campus = await Campus.findByPk(req.params.id);
+    await campus.destroy();
+    res.json(campus);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
